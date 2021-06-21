@@ -1,0 +1,27 @@
+// Gmsh project created on Thu Oct  5 13:46:25 2017
+h = 0.05;
+h2=0.01;
+L = 1;
+R = 0.25;
+Point(1) = {0, 0, 0, h};
+Point(2) = {0, L, 0, h};
+Point(3) = {L, L, 0, h};
+Point(4) = {L, 0, 0, h};
+Point(5) = {L/2, L/2, 0, h};
+Point(6) = {L/2, L/2+R, 0, h2};
+Point(7) = {L/2, L/2-R, 0, h2};
+Point(8) = {L/2+R, L/2, 0, h2};
+Point(9) = {L/2-R, L/2, 0, h2};
+Line(1) = {1, 4};
+Line(2) = {4, 3};
+Line(3) = {3, 2};
+Line(4) = {2, 1};
+Circle(5) = {7, 5, 6};
+Circle(6) = {6, 5, 7};
+Line Loop(7) = {3, 4, 1, 2};
+Line Loop(8) = {5, 6};
+Plane Surface(9) = {7, 8};
+Plane Surface(10) = {8};
+Physical Line("Boundary") = {3, 4, 1, 2};
+Physical Surface("Outer") = {9};
+Physical Surface("Inclusion") = {10};
